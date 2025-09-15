@@ -8,5 +8,13 @@ const { getListaTemas } = require('../controllers/temasController');
 // Rutas de TEMAS
 router.get('/temas', getListaTemas);
 
+// Ruta de TEMAS/NUEVO
+// GET  /temas/nuevo     → muestra formulario de creación
+router.get('/temas/nuevo');
+
+// Ruta TEMAS para procesa creación (validación + guardar + feedback)
+// POST /temas
+router.post('/temas');
+
 // exportar router
 module.exports = router;
