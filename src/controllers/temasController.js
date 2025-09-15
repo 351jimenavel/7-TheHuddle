@@ -36,4 +36,4 @@ function postCrearTema(req, res){
     }
 }
 
-module.exports = { getListaTemas, getFormNuevoTema };
+module.exports = { getListaTemas, getFormNuevoTema, postCrearTema };
