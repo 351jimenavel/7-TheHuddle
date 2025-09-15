@@ -10,3 +10,4 @@ function listWithVoteCountOrdenado(){
 
 const result = listWithVoteCountOrdenado();
 console.log(result);
+module.exports = { listWithVoteCountOrdenado };
