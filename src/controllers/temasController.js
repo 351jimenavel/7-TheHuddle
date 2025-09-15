@@ -1,5 +1,5 @@
 // IMPORTAR temasRepo
-const temasRepo = require("../temasRepo.js");
+const temasRepo = require('../repos/temasRepo');
 
 // FUNCION getListaTemas(req, res):
 function getListaTemas(req, res){
