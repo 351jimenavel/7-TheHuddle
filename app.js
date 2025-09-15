@@ -2,7 +2,7 @@
 const express = require('express')
 const path = require('path');
 const router = require('./src/routes/temas');
-const temasRouter = require('./routes/temas');
+const temasRouter = require('./src/routes/temas');
 const app = express()
 const port = 3000;
 
