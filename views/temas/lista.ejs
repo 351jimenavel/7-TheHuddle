@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love it, Learn it!</title>
+</head>
+<body>
+    <% if (error != "") { %>
+        <p style="color:red"><%= error %></p>
+    <% } %>
+    <% if (ok != ""){ %>
+        <p style="color:chartreuse"> <%= ok %> </p>
+    <%} %>
+    <h1> Lista de Temas </h1>
+    <% if (temas && temas.length > 0) { %>
+        <ul id="lista-temas">
+            <% temas.forEach(t => { %>
+                <li class="tema" data-id="<%= t.id %>" data-votos="<%= t.votos %>">
+                    <strong class="titulo"><%= t.titulo %></strong>
+                    — <span class="votos"><%= t.votos %></span> votos
+                    <p><a href="/temas/:id">Ver detalles</a></p>
+                    <button type="button" class="btn-votar-tema">Votar tema</button>
+                </li>
+                <% }) %>
+            </ul>
+            <% } else { %>
+                <p>No hay temas aún.</p>
+                <% } %>
+    <p><a href="/temas/nuevo">Crear nuevo tema</a></p>
+
+</body>
+</html>
