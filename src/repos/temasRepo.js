@@ -31,4 +31,4 @@ function obtenerTema(id){
 
 const result = listWithVoteCountOrdenado();
 console.log(result);
-module.exports = { listWithVoteCountOrdenado };
+module.exports = { listWithVoteCountOrdenado, create };
