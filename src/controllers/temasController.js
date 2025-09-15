@@ -13,4 +13,27 @@ function getListaTemas(req, res){
     }
 }
 
-module.exports = { getListaTemas };
+function getFormNuevoTema(req, res){
+    res.render('/temas/nuevo', {ok:"", error:"", form:{titulo:"",descripcion:""}});
+}
+
+function postCrearTema(req, res){
+    const data = req.body;
+    const titulo = data.titulo;
+    const descripcion = data.descripcion;
+    // Validacion
+    if (titulo == ""){
+        res.render('temas/nuevo', {ok:"", error:"El titulo es obligatorio", form:{titulo,descripcion}});
+    }
+    
+    // Llamar a repo
+    try{
+        const temaNuevo = temasRepo.create({titulo, descripcion});
+        res.redirect('/temas');
+    }
+    catch(err){
+        res.render('temas/nuevo', { ok: "", error: "No se pudo crear el tema.", form: { titulo, descripcion }});
+    }
+}
+
+module.exports = { getListaTemas, getFormNuevoTema };
