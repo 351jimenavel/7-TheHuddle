@@ -40,9 +40,9 @@ function postCrearTema(req, res){
 
 function getFormEditarTema(req, res){
     const id = req.params.id;
-    const tema = temasRepo.obtenerTema(id);
+    const tema = temasRepo.getById(id);
     if (tema){
-        return res.render('temas/editar', { ok:"", error:"", form:{titulo:tema.titulo, descripcion:tema.descripcion} });
+        return res.render('temas/editar', { ok:"", error:"", id:tema.id, form:{titulo:tema.titulo, descripcion:tema.descripcion} });
     } else {
         return res.redirect('/temas?error=Tema no encontrado');
     }
@@ -50,21 +50,22 @@ function getFormEditarTema(req, res){
 
 function postEditarTema(req, res){
     const id = req.params.id;
-    const titulo = req.body.titulo;
-    const descripcion = req.body.descripcion;
+    const titulo = (req.body.titulo || "").trim();
+    const descripcion = (req.body.descripcion || "").trim();
 
     if (titulo === ""){
-        return res.render('temas/editar', { ok:"", error:"El título es obligatorio", form:{titulo,descripcion} });
+        return res.render('temas/editar', { ok:"", error:"El título es obligatorio", id, form:{titulo,descripcion} });
     }
 
     try{
         temasRepo.update(id, {titulo: titulo, descripcion: descripcion});
         return res.redirect('/temas?ok=Tema actualizado');
     }catch(err){
-        if (err == NOT_FOUND){
+        if (err && err.message === NOT_FOUND){
             return res.redirect('/temas?error=Tema no encontrado');
         }else{
-            return res.render('temas/editar', { ok:"", error:"No se pudo actualizar", form:{titulo,descripcion} });
+            console.error("postEditarTema error:", err);
+            return res.render('temas/editar', { ok:"", error:"No se pudo actualizar", id, form:{titulo,descripcion} });
         }
     }
 }
@@ -73,10 +74,10 @@ function postEliminarTema(req, res){
     const id = req.params.id;
     const filas = temasRepo.remove(id);
 
-    if (filas == 0){
+    if (filas === 0){
         return res.redirect('/temas?error=Tema no encontrado');
     }else{
         return res.redirect('/temas?ok=Tema eliminado');
     }
 }
-module.exports = { getListaTemas, getFormNuevoTema, postCrearTema, getFormEditarTema, postEditarTema };
+module.exports = { getListaTemas, getFormNuevoTema, postCrearTema, getFormEditarTema, postEditarTema, postEliminarTema };
