@@ -61,7 +61,7 @@ function postEditarTema(req, res){
         temasRepo.update(id, {titulo: titulo, descripcion: descripcion});
         return res.redirect('/temas?ok=Tema actualizado');
     }catch(err){
-        if (err && err.message === NOT_FOUND){
+        if (err && err.message === 'NOT_FOUND'){
             return res.redirect('/temas?error=Tema no encontrado');
         }else{
             console.error("postEditarTema error:", err);
