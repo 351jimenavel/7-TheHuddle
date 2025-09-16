@@ -19,7 +19,7 @@
                 <li class="tema" data-id="<%= t.id %>" data-votos="<%= t.votos %>">
                     <strong class="titulo"><%= t.titulo %></strong>
                     — <span class="votos"><%= t.votos %></span> votos
-                    <p><a href="/temas/:id">Ver detalles</a></p>
+                    <p><a href="/temas/<%= t.id %>">Ver detalles</a></p>
                     <button type="button" class="btn-votar-tema">Votar tema</button>
                 </li>
                 <% }) %>
