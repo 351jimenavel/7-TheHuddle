@@ -8,11 +8,18 @@ function listWithVoteCountOrdenado(){
     return row
 }
 
+function obtenerTema(id){
+    return db.prepare(`SELECT * FROM temas WHERE id = ?`).get(Number(id))
+}
+
 function create({titulo, descripcion}){
     const descripcionLimpia = descripcion.trim();
     const descripcion = descripcionLimpia || "";
 
-    if (titulo == '' || titulo.length > 120){
+    const tituloLimpio = descripcion.trim();
+    const titulo = tituloLimpio || "";
+
+    if (titulo === '' || titulo.length > 120){
         return {error:"Titulo demasiado largo"}
     };
 
@@ -25,10 +32,4 @@ function create({titulo, descripcion}){
     return temaCreado;
 }
 
-function obtenerTema(id){
-    return db.prepare(`SELECT * FROM temas WHERE id = ?`).get(Number(id))
-}
-
-const result = listWithVoteCountOrdenado();
-console.log(result);
 module.exports = { listWithVoteCountOrdenado, create };
