@@ -39,19 +39,19 @@ function getById(id){
 function update(id,{titulo, descripcion}){
     const tema = getById(id);
     if (!tema){
-        throw new Error("NOT_FOUND");
+        throw new Error('NOT_FOUND');
     }
 
     const tituloOk = titulo.trim();
     const descripcionOk = descripcion.trim() || "";
 
     if (tituloOk === ""){
-        throw new Error("BAD_REQUEST");
+        throw new Error('BAD_REQUEST');
     }
     
     const info = db.prepare(`
     UPDATE temas SET titulo = ?, descripcion = ? WHERE id = ?
-    `).run(tituloOk, descOk, Number(id));
+    `).run(tituloOk, descripcionOk, Number(id));
     return getById(id)
 }
 
