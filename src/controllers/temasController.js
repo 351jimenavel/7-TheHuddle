@@ -38,4 +38,35 @@ function postCrearTema(req, res){
     }
 }
 
-module.exports = { getListaTemas, getFormNuevoTema, postCrearTema };
+function getFormEditarTema(req, res){
+    const id = req.params.id;
+    const tema = temasRepo.obtenerTema(id);
+    if (tema){
+        return res.render('temas/editar', { ok:"", error:"", form:{titulo:tema.titulo, descripcion:tema.descripcion} });
+    } else {
+        return res.redirect('/temas?error=Tema no encontrado');
+    }
+}
+
+function postEditarTema(req, res){
+    const id = req.params.id;
+    const titulo = req.body.titulo;
+    const descripcion = req.body.descripcion;
+
+    if (titulo === ""){
+        return res.render('temas/editar', { ok:"", error:"El título es obligatorio", form:{titulo,descripcion} });
+    }
+
+    try{
+        temasRepo.update(id, {titulo: titulo, descripcion: descripcion});
+        return res.redirect('/temas?ok=Tema actualizado');
+    }catch(err){
+        if (err == NOT_FOUND){
+            return res.redirect('/temas?error=Tema no encontrado');
+        }else{
+            return res.render('temas/editar', { ok:"", error:"No se pudo actualizar", form:{titulo,descripcion} });
+        }
+    }
+}
+
+module.exports = { getListaTemas, getFormNuevoTema, postCrearTema, getFormEditarTema, postEditarTema };
