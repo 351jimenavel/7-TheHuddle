@@ -14,12 +14,12 @@ function obtenerTema(id){
 
 function create({titulo, descripcion}){
     const descripcionLimpia = descripcion.trim();
-    const descripcion = descripcionLimpia || "";
+    const descripcionOk = descripcionLimpia || "";
 
-    const tituloLimpio = descripcion.trim();
-    const titulo = tituloLimpio || "";
+    const tituloLimpio = titulo.trim();
+    const tituloOk = tituloLimpio || "";
 
-    if (titulo === '' || titulo.length > 120){
+    if (tituloOk === '' || tituloOk.length > 120){
         return {error:"Titulo demasiado largo"}
     };
 
@@ -27,8 +27,8 @@ function create({titulo, descripcion}){
     INSERT INTO temas (titulo, descripcion)
     VALUES (?, ?);
     `);
-    const id_nuevo = nuevoTema.lastInsertRowid;
-    const temaCreado = obtenerTema(id_nuevo);
+    const id_nuevo = nuevoTema.run(tituloOk, descripcionOk);
+    const temaCreado = obtenerTema(id_nuevo.lastInsertRowid);
     return temaCreado;
 }
 
