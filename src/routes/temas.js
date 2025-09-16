@@ -3,7 +3,12 @@ const express = require('express');
 const router = express.Router();
 
 // Importar controlador
-const { getListaTemas, getFormNuevoTema, postCrearTema, getFormEditarTema, postEditarTema, postEliminarTema } = require('../controllers/temasController');
+const { getListaTemas, 
+    getFormNuevoTema, 
+    postCrearTema, 
+    getFormEditarTema, 
+    postEditarTema, 
+    postEliminarTema } = require('../controllers/temasController');
 
 // Rutas de TEMAS
 router.get('/temas', getListaTemas);
