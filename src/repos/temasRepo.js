@@ -32,4 +32,35 @@ function create({titulo, descripcion}){
     return temaCreado;
 }
 
-module.exports = { listWithVoteCountOrdenado, create };
+function getById(id){
+    const row = db.prepare(`SELECT * FROM temas WHERE id = ?`);
+    return row || null;
+}
+
+function update(id,{titulo, descripcion}){
+    tema = getById(id);
+    if (tema === null){
+        throw new Error("NOT_FOUND");
+    }
+
+    tituloOk = titulo.trim();
+    descripcionOk = descripcion.trim() || "";
+
+    if (tituloOk === ''){
+        throw new Error("BAD_REQUEST");
+    }
+    
+    db.prepare(`
+    UPDATE temas SET titulo=?, descripcion=? WHERE id=?;
+    `);
+    return getById()
+}
+
+function remove(id){
+    const filasAfectadas = db.prepare(`
+    DELETE FROM temas WHERE id=?;
+    `);
+    return filasAfectadas;
+}
+
+module.exports = { listWithVoteCountOrdenado, create, getById };
