@@ -14,25 +14,27 @@ function getListaTemas(req, res){
 }
 
 function getFormNuevoTema(req, res){
-    res.render('/temas/nuevo', {ok:"", error:"", form:{titulo:"",descripcion:""}});
+    res.render('temas/nuevo', {ok:"", error:"", form:{titulo:"",descripcion:""}});
 }
 
 function postCrearTema(req, res){
-    const data = req.body;
-    const titulo = data.titulo;
-    const descripcion = data.descripcion;
+    const { titulo = "", descripcion = "" } = req.body || {};
+    const tituloTrim = titulo.trim();
+    const descripcionTrim = descripcion.trim();
+    
     // Validacion
-    if (titulo == ""){
-        res.render('temas/nuevo', {ok:"", error:"El titulo es obligatorio", form:{titulo,descripcion}});
+    if (titulo === ""){
+        return res.render('temas/nuevo', {ok:"", error:"El titulo es obligatorio", form:{titulo,descripcion}});
     }
     
     // Llamar a repo
     try{
-        const temaNuevo = temasRepo.create({titulo, descripcion});
-        res.redirect('/temas');
+        temasRepo.create({titulo: tituloTrim, descripcion: descripcionTrim});
+        return res.redirect('/temas');
     }
     catch(err){
-        res.render('temas/nuevo', { ok: "", error: "No se pudo crear el tema.", form: { titulo, descripcion }});
+        console.error("postCrearTema error:", err);
+        return res.render('temas/nuevo', { ok: "", error: "No se pudo crear el tema.", form: { titulo, descripcion }});
     }
 }
 
