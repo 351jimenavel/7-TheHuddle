@@ -69,4 +69,14 @@ function postEditarTema(req, res){
     }
 }
 
+function postEliminarTema(req, res){
+    const id = req.params.id;
+    const filas = temasRepo.remove(id);
+
+    if (filas == 0){
+        return res.redirect('/temas?error=Tema no encontrado');
+    }else{
+        return res.redirect('/temas?ok=Tema eliminado');
+    }
+}
 module.exports = { getListaTemas, getFormNuevoTema, postCrearTema, getFormEditarTema, postEditarTema };
