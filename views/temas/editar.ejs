@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header> Editar Tema </header>
+    <% if (error != "") { %>
+        <p style="color:red"><%= error %></p>
+    <% } %>
+    <% if (ok != ""){ %>
+        <p style="color:chartreuse"> <%= ok %> </p>
+    <%} %>
+    <form method="POST" action="/temas/<%= id %>/editar">
+        <input name="titulo" value="<%= form.titulo %>">
+        <textarea name="descripcion"><%= form.descripcion %></textarea>
+        <button type="submit"> Guardar </button>
+        <a href="/temas"> Cancelar </a>
+    </form>
+</body>
+</html>
