@@ -12,9 +12,6 @@ app.use(express.static(path.join(__dirname, 'public'))); // Sirve archivos está
 app.use(express.urlencoded({ extended: true }));
 app.use(temasRouter);
 
-app.get('/', (req, res) => {
-    res.render('index');
-})
 app.listen(port, () => {
     console.log("Servidor corriendo en puerto", `${port}`);
 });
