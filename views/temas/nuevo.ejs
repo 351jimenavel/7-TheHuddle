@@ -16,18 +16,16 @@
     <form method="POST" action="/temas">
         <fieldset>
             <label> Titulo 
-                <input type="text" name="titulo" value="form.titulo">
+                <input type="text" name="titulo" value="<%= form.titulo %>">
             </label>
         </fieldset>
         <fieldset>
             <label> Descripcion 
-                <textarea name="descripcion" value="form.descripcion"> </textarea>
+                <textarea name="descripcion"><%= form.descripcion %></textarea>
             </label>
         </fieldset>
-        <button>
-            <submit> Crear </submit>
-            <p></p><a href="/temas"> Cancelar </a></p>
-        </button>
+        <button type="submit"> Crear </button>
+        <a href="/temas"> Cancelar </a>
     </form>
 </body>
 </html>
