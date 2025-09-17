@@ -8,7 +8,9 @@ const { getListaTemas,
     postCrearTema, 
     getFormEditarTema, 
     postEditarTema, 
-    postEliminarTema } = require('../controllers/temasController');
+    postEliminarTema,
+    getDetalleTema,
+    postCrearEnlace } = require('../controllers/temasController');
 
 // Rutas de TEMAS
 router.get('/temas', getListaTemas);
@@ -27,6 +29,13 @@ router.post('/temas/:id/editar', postEditarTema);
 
 // Ruta DELETE temas
 router.post('/temas/:id/eliminar', postEliminarTema);
+
+// Rutas para ENLACES
+// detalle + lista de enlaces
+router.get('/temas/:id', getDetalleTema);
+
+// crear enlace dentro del tema
+router.post('/temas/:id/enlaces', postCrearEnlace);
 
 // exportar router
 module.exports = router;
