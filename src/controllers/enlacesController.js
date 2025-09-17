@@ -2,12 +2,22 @@ const temasRepo = require('../repos/temasRepo');
 const enlacesRepo = require('../repos/enlacesRepo');
 
 function postCrearEnlace(req, res){
-    const temaId = req.params.id;
+    const temaIdRaw = req.params.id;
+    const temaId = Number(temaIdRaw);
 
     const { titulo = "", url = "",descripcion = "" } = req.body || {};
     const tituloTrim = titulo.trim();
     const urlTrim = url.trim();
     const descripcionTrim = descripcion.trim();
+
+    // Logs de diagnóstico
+    console.log('[postCrearEnlace] temaIdRaw:', temaIdRaw, 'temaId:', temaId);
+    console.log('[postCrearEnlace] titulo:', tituloTrim, 'url:', urlTrim);
+
+    // Validaciones del controller (evitan BAD_REQUEST del repo)
+    if (!Number.isFinite(temaId) || temaId <= 0) {
+        return res.redirect(`/temas/${temaIdRaw || ''}?error=Tema inválido`);
+    }
 
     if (tituloTrim === "" || urlTrim === ""){
         return res.redirect(`/temas/${temaId}?error=Datos invalidos`);
