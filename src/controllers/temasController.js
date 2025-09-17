@@ -98,4 +98,4 @@ function getDetalleTema(req, res){
     return res.render('temas/detalle', { tema, enlaces, ok, error, form: { titulo:"", url:"", descripcion:"" }});
 }
 
-module.exports = { getListaTemas, getFormNuevoTema, postCrearTema, getFormEditarTema, postEditarTema, postEliminarTema };
+module.exports = { getListaTemas, getFormNuevoTema, postCrearTema, getFormEditarTema, postEditarTema, postEliminarTema, getDetalleTema };
