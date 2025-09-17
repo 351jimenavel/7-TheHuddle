@@ -7,10 +7,10 @@
 </head>
 <body>
     <h1> Editar Enlace </h1>
-    <% if (error != "") { %>
+    <% if (error && error != "") { %>
         <p style="color:red"><%= error %></p>
     <% } %>
-    <% if (ok != ""){ %>
+    <% if (ok && ok != ""){ %>
         <p style="color:chartreuse"> <%= ok %> </p>
     <%} %>
     <form method="POST" action="/enlaces/<%= id %>/editar">
@@ -18,7 +18,7 @@
         <input type="text" name="url" value="<%= form.url &>">
         <textarea name="descripcion"><%= form.descripcion %></textarea>
         <button type="submit"> Guardar </button>
-        <a href="/temas/<%=temaId%>"> Cancelar </a>
+        <a href="/temas/<%= temaId %>"> Cancelar </a>
     </form>
 </body>
 </html>
