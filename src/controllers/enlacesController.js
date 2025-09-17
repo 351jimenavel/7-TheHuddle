@@ -47,8 +47,8 @@ function postEditarEnlace(req, res){
     const url = (req.body.url || "").trim();
     const descripcion = (req.body.descripcion || "").trim();
 
-    if (titulo === ""){
-        return res.render('enlaces/editar', { ok:"", error:"El título es obligatorio", id, form:{titulo,url,descripcion} });
+    if (titulo === "" || url === ""){
+        return res.render('enlaces/editar', { ok:"", error:"Datos inválidos", id, temaId, form:{titulo,url,descripcion} });
     }
 
     try{
