@@ -40,16 +40,17 @@ function update(id, {titulo, url, descripcion}){
         throw new Error('NOT_FOUND');
     }
 
-    const tituloOk = titulo.trim();
-    const descripcionOk = descripcion.trim() || "";
+    const tituloOk = (titulo || "").trim();
+    const urlOk = (url || "").trim();
+    const descOk = (descripcion || "").trim();
 
-    if (tituloOk === ""){
+    if (tituloOk === "" || urlOk === ""){
         throw new Error('BAD_REQUEST');
     }
     
     const info = db.prepare(`
     UPDATE enlaces SET titulo = ?, url = ?, descripcion = ? WHERE id = ?
-    `).run(tituloOk, url , descripcionOk, Number(id));
+    `).run(tituloOk, urlOk , descOk, Number(id));
     return getById(id)
 }
 
