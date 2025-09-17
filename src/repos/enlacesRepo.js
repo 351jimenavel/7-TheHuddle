@@ -57,3 +57,5 @@ function remove(id){
     const info = db.prepare(`DELETE FROM enlaces WHERE id = ?`).run(Number(id));
     return info.changes; // 0 o 1
 }
+
+module.exports = { listByTema, create, getById, update, remove };
