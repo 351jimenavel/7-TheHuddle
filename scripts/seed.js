@@ -12,12 +12,14 @@ db.exec(`
     `);
 
 // Crear tabla ENLACES (pertenece a un tema)
+db.exec(`DROP TABLE IF EXISTS enlaces;`);
 db.exec(`
     CREATE TABLE IF NOT EXISTS enlaces (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     tema_id INTEGER NOT NULL,
     titulo TEXT NOT NULL,
     url TEXT NOT NULL,
+    descripcion TEXT DEFAULT '',
     votos INTEGER NOT NULL DEFAULT 0,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (tema_id) REFERENCES temas(id) ON DELETE CASCADE
