@@ -37,7 +37,12 @@ function getFormEditarEnlace(req, res){
 
 function postEditarEnlace(req, res){
     const id = req.params.id;
+    const actual = enlacesRepo.getById(id); // conocer temaId para redirigir
+    if (!actual){
+        return res.redirect('/temas?error=Enlace no encontrado');
+    }
 
+    const temaId = actual.tema_id;
     const titulo = (req.body.titulo || "").trim();
     const url = (req.body.url || "").trim();
     const descripcion = (req.body.descripcion || "").trim();
