@@ -32,7 +32,7 @@ function getFormEditarEnlace(req, res){
     if (!enlace){
         return res.redirect('/temas?error=Enlace no encontrado');
     }
-    return res.render('enlaces/editar', { ok:"", error:"", id:enlace.id, form:{titulo:enlace.titulo, url: enlace.url,descripcion:enlace.descripcion}, temaId: enlace.tema_id });
+    return res.render('enlaces/editar', { ok:"", error:"", id:enlace.id, temaId: enlace.tema_id, form:{titulo:enlace.titulo, url: enlace.url,descripcion:enlace.descripcion} });
 }
 
 function postEditarEnlace(req, res){
