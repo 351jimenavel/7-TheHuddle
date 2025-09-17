@@ -15,3 +15,5 @@ router.get('/enlaces/:id/editar', getFormEditarEnlace);
 router.post('/enlaces/:id/editar', postEditarEnlace);
 
 router.post('/enlaces/:id/eliminar', postEliminarEnlace);
+
+module.exports = router;
