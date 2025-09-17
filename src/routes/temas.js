@@ -9,9 +9,9 @@ const { getListaTemas,
     getFormEditarTema, 
     postEditarTema, 
     postEliminarTema,
-    getDetalleTema,
-    postCrearEnlace } = require('../controllers/temasController');
+    getDetalleTema } = require('../controllers/temasController');
 
+const { postCrearEnlace, } = require('../controllers/enlacesController');
 // Rutas de TEMAS
 router.get('/temas', getListaTemas);
 
