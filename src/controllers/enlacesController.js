@@ -53,17 +53,17 @@ function postEditarEnlace(req, res){
 
     try{
         enlacesRepo.update(id, {titulo: titulo, url:url ,descripcion: descripcion});
-        return res.redirect('/temas/:temaId?ok=Enlace actualizado'); // temaId viene del enlace o lo pasás en el form hidden
+        return res.redirect('/temas/${temaId}?ok=Enlace actualizado'); // temaId viene del enlace o lo pasás en el form hidden
     }catch(err){
         if (err && err.message === 'NOT_FOUND'){
             return res.redirect('/temas?error=Enlace no encontrado');
         }
         if(err && err.message === 'CONFLICT'){
-            return res.render('/enlaces/editar', { ok:"", error:"URL duplicada en este tema", id, form:{titulo,url,descripcion} });
+            return res.render('/enlaces/editar', { ok:"", error:"URL duplicada en este tema", id, temaId, form:{titulo,url,descripcion} });
         }
         
         console.error("postEditarEnlace error:", err);
-        return res.render('enlaces/editar', { ok:"", error:"No se pudo actualizar", id, form:{titulo,url,descripcion} });
+        return res.render('enlaces/editar', { ok:"", error:"No se pudo actualizar", id, temaId, form:{titulo,url,descripcion} });
     }
 }
 
