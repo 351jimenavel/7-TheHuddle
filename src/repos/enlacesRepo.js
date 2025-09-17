@@ -13,8 +13,9 @@ function getById(id){
 function create({tema_id, titulo, url, descripcion}){
     const idTema = Number(tema_id);
     
-    if (!Number.isNaN(idTema)){
-        throw new Error("BAD_REQUEST"); // id tema inválido
+    // Validaciones
+    if (!Number.isFinite(idTema) || idTema <= 0) {
+        throw new Error("BAD_REQUEST"); // tema_id inválido
     }
 
     const tituloOk = (titulo || "").trim();
