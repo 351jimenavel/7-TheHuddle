@@ -5,8 +5,10 @@ const enlacesRepo = require('../repos/enlacesRepo');
 // FUNCION getListaTemas(req, res):
 function getListaTemas(req, res){
     try{
+        const ok = req.query.ok || "";
+        const error = req.query.error || "";
         const temas = temasRepo.listWithVoteCountOrdenado();
-        res.render('temas/lista', {temas: temas,ok: "",error: ""});
+        res.render('temas/lista', {temas: temas,ok,error});
     }
     catch(err){
         console.error("Error en getListaTemas:", err);
