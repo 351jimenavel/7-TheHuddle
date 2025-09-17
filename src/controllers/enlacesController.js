@@ -10,18 +10,18 @@ function postCrearEnlace(req, res){
     const descripcionTrim = descripcion.trim();
 
     if (tituloTrim === "" || urlTrim === ""){
-        return res.redirect('/temas/${temaId}?error=Datos invalidos');
+        return res.redirect(`/temas/${temaId}?error=Datos invalidos`);
     }
 
     try{
         enlacesRepo.create({tema_id: temaId, titulo: tituloTrim, url: urlTrim, descripcion:descripcionTrim});
-        return res.redirect('/temas/${temaId}?ok=Enlace creado');
+        return res.redirect(`/temas/${temaId}?ok=Enlace creado`);
     }catch(err){
         if (err.message === 'CONFLICT'){
             return res.redirect('/temas/${temaId}?error=Ya existe un enlace con esa URL');
         }
         console.error("postCrearEnlace error:", err);
-        return res.redirect('/temas/${temaId}?error=No se pudo crear el enlace');
+        return res.redirect(`/temas/${temaId}?error=No se pudo crear el enlace`);
     }
 }
 
@@ -53,7 +53,7 @@ function postEditarEnlace(req, res){
 
     try{
         enlacesRepo.update(id, {titulo: titulo, url:url ,descripcion: descripcion});
-        return res.redirect('/temas/${temaId}?ok=Enlace actualizado'); // temaId viene del enlace o lo pasás en el form hidden
+        return res.redirect(`/temas/${temaId}?ok=Enlace actualizado`); // temaId viene del enlace o lo pasás en el form hidden
     }catch(err){
         if (err && err.message === 'NOT_FOUND'){
             return res.redirect('/temas?error=Enlace no encontrado');
@@ -78,9 +78,9 @@ function postEliminarEnlace(req, res){
     const filas = enlacesRepo.remove(id);
     
     if (filas === 1){
-        return res.redirect('/temas/${temaId}?ok=Enlace eliminado');
+        return res.redirect(`/temas/${temaId}?ok=Enlace eliminado`);
     }else{
-        return res.redirect('/temas/${temaId}?error=No se pudo eliminar');
+        return res.redirect(`/temas/${temaId}?error=No se pudo eliminar`);
     }
 }
 
