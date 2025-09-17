@@ -7,13 +7,13 @@ function listByTema(temaId){
 }
 
 function getById(id){
-    return db.prepare(`SELECT * FROM enlaces WHERE id = ?`).get(Number(id));
+    return db.prepare(`SELECT * FROM enlaces WHERE id = ?`).get(Number(id)) || null;
 }
 
 function create({tema_id, titulo, url, descripcion}){
     const idTema = Number(tema_id);
     
-    if (!Number.isNaN(tema_id)){
+    if (!Number.isNaN(idTema)){
         throw new Error("BAD_REQUEST"); // id tema inválido
     }
 
