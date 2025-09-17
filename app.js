@@ -3,6 +3,8 @@ const express = require('express')
 const path = require('path');
 const router = require('./src/routes/temas');
 const temasRouter = require('./src/routes/temas');
+const enlacesRouter = require('./src/routes/enlaces');
+
 const app = express()
 const port = 3000;
 
@@ -11,6 +13,7 @@ app.set('views', path.join(__dirname, 'views'));// Indica a Express dónde encon
 app.use(express.static(path.join(__dirname, 'public'))); // Sirve archivos estáticos desde la carpeta 'public'
 app.use(express.urlencoded({ extended: true }));
 app.use(temasRouter);
+app.use(enlacesRouter);
 
 app.listen(port, () => {
     console.log("Servidor corriendo en puerto", `${port}`);
