@@ -51,7 +51,7 @@ function update(id, {titulo, url, descripcion}){
     const info = db.prepare(`
     UPDATE enlaces SET titulo = ?, url = ?, descripcion = ? WHERE id = ?
     `).run(tituloOk, urlOk , descOk, Number(id));
-    return getById(id)
+    return getById(info.id)
 }
 
 function remove(id){
