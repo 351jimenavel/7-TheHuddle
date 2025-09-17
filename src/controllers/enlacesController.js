@@ -18,7 +18,7 @@ function postCrearEnlace(req, res){
         return res.redirect(`/temas/${temaId}?ok=Enlace creado`);
     }catch(err){
         if (err.message === 'CONFLICT'){
-            return res.redirect('/temas/${temaId}?error=Ya existe un enlace con esa URL');
+            return res.redirect(`/temas/${temaId}?error=Ya existe un enlace con esa URL`);
         }
         console.error("postCrearEnlace error:", err);
         return res.redirect(`/temas/${temaId}?error=No se pudo crear el enlace`);
