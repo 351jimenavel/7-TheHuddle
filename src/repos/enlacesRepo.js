@@ -71,4 +71,4 @@ function vote(id){
     return getById(incrementar); // para leer el nuevo total
 }
 
-module.exports = { listByTema, create, getById, update, remove };
+module.exports = { listByTema, create, getById, update, remove, vote };
