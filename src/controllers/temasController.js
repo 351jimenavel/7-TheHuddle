@@ -33,7 +33,7 @@ function postCrearTema(req, res){
     // Llamar a repo
     try{
         temasRepo.create({titulo: tituloTrim, descripcion: descripcionTrim});
-        return res.redirect('/temas');
+        return res.redirect('/temas?ok=Tema creado correctamente');
     }
     catch(err){
         console.error("postCrearTema error:", err);
@@ -100,4 +100,10 @@ function getDetalleTema(req, res){
     return res.render('temas/detalle', { tema, enlaces, ok, error, form: { titulo:"", url:"", descripcion:"" }});
 }
 
-module.exports = { getListaTemas, getFormNuevoTema, postCrearTema, getFormEditarTema, postEditarTema, postEliminarTema, getDetalleTema };
+module.exports = { getListaTemas, 
+    getFormNuevoTema, 
+    postCrearTema, 
+    getFormEditarTema, 
+    postEditarTema, 
+    postEliminarTema, 
+    getDetalleTema };
