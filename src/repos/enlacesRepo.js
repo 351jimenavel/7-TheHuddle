@@ -60,4 +60,15 @@ function remove(id){
     return info.changes; // 0 o 1
 }
 
+function vote(id){
+    const enlace = getById(id);
+
+    if (!enlace === ""){
+        throw new Error('NOT_FOUND');
+    }
+
+    const incrementar = db.prepare(`UPDATE enlaces SET votos = votos + 1 WHERE id = ?`).run(Number(id));
+    return getById(incrementar); // para leer el nuevo total
+}
+
 module.exports = { listByTema, create, getById, update, remove };

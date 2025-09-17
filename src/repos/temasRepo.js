@@ -60,4 +60,15 @@ function remove(id){
     return info.changes; // 0 o 1
 }
 
-module.exports = { listWithVoteCountOrdenado, create, getById, update, remove };
+function vote(id){
+    const tema = getById(id);
+
+    if (!tema === ""){
+        throw new Error('NOT_FOUND');
+    }
+
+    const incrementar = db.prepare(`UPDATE temas SET votos = votos + 1 WHERE id = ?`).run(Number(id));
+    return getById(incrementar); // para leer el nuevo total
+}
+
+module.exports = { listWithVoteCountOrdenado, create, getById, update, remove, vote };
