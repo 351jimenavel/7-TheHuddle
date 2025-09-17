@@ -19,15 +19,15 @@
     <% if (enlaces.length > 0) { %>
         <ul id="lista-enlaces">
         <% enlaces.forEach(e => { %>
-            <li class="tema" data-id="<%= e.id %>" data-votos="<%= e.votos %>">
+            <li class="enlace" data-id="<%= e.id %>">
                 <strong class="titulo"><%= e.titulo %></strong>
-                <p><a href="/enlaces/<%= e.url %>">Abrir enlace</a></p>
+                <p><a href="<%= e.url %>" target="_blank" rel="noopener noreferrer">Abrir enlace</a></p>
                 <% if (e.descripcion){ %>
                     <p><%= e.descripcion %></p>
                 <% } %>
-                — <span class="votos"><%= e.votos %></span> votos
+                <!-- — <span class="votos"><%= e.votos %></span> votos -->
                 <p><a href="/enlaces/<%= e.id %>/editar">Editar</a></p>
-                <button type="button" class="btn-votar-tema">Votar enlace</button>
+                <!-- <button type="button" class="btn-votar-tema">Votar enlace</button> -->
                 <form method="POST" action="/enlaces/<%= e.id %>/eliminar">
                     <button type="submit"> Eliminar </button>
                 </form>
@@ -39,9 +39,9 @@
         <% } %>
     <h2> Agregar enlace </h2>
     <form method="POST" action="/temas/<%= tema.id %>/enlaces">
-        <input type="text" name="titulo" value="<%= form.titulo &>">
-        <input type="text" name="url" value="<%= form.url &>">
-        <textarea name="descripcion"><%= form.descripcion %></textarea>
+        <input type="text" name="titulo" placeholder="Título" value="<%= form.titulo &>">
+        <input type="text" name="url" placeholder="https://..." value="<%= form.url &>">
+        <textarea name="descripcion" placeholder="Descripción (opcional)"><%= form.descripcion %></textarea>
         <button type="submit"> Agregar </button>
     </form>
 </body>
