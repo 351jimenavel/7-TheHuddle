@@ -100,10 +100,27 @@ function getDetalleTema(req, res){
     return res.render('temas/detalle', { tema, enlaces, ok, error, form: { titulo:"", url:"", descripcion:"" }});
 }
 
+// Votar tema
+function postVotarTema(req, res){
+    const id = req.params.id;
+
+    try{
+        const actualizado = temasRepo.vote(id);
+        if (actualizado){
+            return res.send({ok: true, votos: actualizado.votos, id});
+        } else{
+            return res.redirect("/temas?ok=Voto registrado");
+        }
+    }catch(err){
+        return res.redirect('/temas?error=Tema no encontrado');
+    }
+}
+
 module.exports = { getListaTemas, 
     getFormNuevoTema, 
     postCrearTema, 
     getFormEditarTema, 
     postEditarTema, 
     postEliminarTema, 
-    getDetalleTema };
+    getDetalleTema,
+    postVotarTema };
