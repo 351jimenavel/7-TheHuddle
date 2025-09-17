@@ -29,7 +29,7 @@ function create({tema_id, titulo, url, descripcion}){
     INSERT INTO enlaces (tema_id, titulo, url, descripcion)
     VALUES (?, ?, ?, ?);
     `);
-    const id_nuevo = enlace.run(tema_id, tituloOk, urlOk, descOk);
+    const id_nuevo = enlace.run(idTema, tituloOk, urlOk, descOk);
     const enlaceCreado = getById(id_nuevo.lastInsertRowid);
     return enlaceCreado;
 }
