@@ -74,12 +74,13 @@ function postEliminarEnlace(req, res){
     if (!enlace){
         return res.redirect('/temas?error=Enlace no encontrado');
     }
+    const temaId = enlace.tema_id;
     const filas = enlacesRepo.remove(id);
     
     if (filas === 1){
-        return res.redirect('/temas/:enlace.tema_id?ok=Enlace eliminado');
+        return res.redirect('/temas/${temaId}?ok=Enlace eliminado');
     }else{
-        return res.redirect('/temas/:enlace.tema_id?error=No se pudo eliminar');
+        return res.redirect('/temas/${temaId}?error=No se pudo eliminar');
     }
 }
 
