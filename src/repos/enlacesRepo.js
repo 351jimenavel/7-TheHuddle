@@ -11,25 +11,25 @@ function getById(id){
 }
 
 function create({tema_id, titulo, url, descripcion}){
-    const descripcionLimpia = descripcion.trim();
-    const descripcionOk = descripcionLimpia || "";
-
-    const tituloLimpio = titulo.trim();
-    const tituloOk = tituloLimpio || "";
-
-    if (tituloOk === '' || tituloOk.length > 120){
-        return {error:"Titulo demasiado largo"}
-    };
-
+    const idTema = Number(tema_id);
+    
     if (!Number.isNaN(tema_id)){
-        return {error:"El id del tema debe ser un numero"}
+        throw new Error("BAD_REQUEST"); // id tema inválido
     }
+
+    const tituloOk = (titulo || "").trim();
+    const urlOk = (url || "").trim();
+    const descOk = (descripcion || "").trim();
+
+    if (tituloOk === "" || urlOk === ""){
+        throw new Error("BAD_REQUEST"); // datos incompletos
+    };
 
     const enlace = db.prepare(`
     INSERT INTO enlaces (tema_id, titulo, url, descripcion)
     VALUES (?, ?, ?, ?);
     `);
-    const id_nuevo = enlace.run(tema_id, tituloOk, url, descripcionOk);
+    const id_nuevo = enlace.run(tema_id, tituloOk, urlOk, descOk);
     const enlaceCreado = getById(id_nuevo.lastInsertRowid);
     return enlaceCreado;
 }
