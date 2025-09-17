@@ -39,8 +39,8 @@
         <% } %>
     <h2> Agregar enlace </h2>
     <form method="POST" action="/temas/<%= tema.id %>/enlaces">
-        <input type="text" name="titulo" placeholder="Título" value="<%= form.titulo &>">
-        <input type="text" name="url" placeholder="https://..." value="<%= form.url &>">
+        <input type="text" name="titulo" placeholder="Título" value="<%= form.titulo %>">
+        <input type="text" name="url" placeholder="https://..." value="<%= form.url %>">
         <textarea name="descripcion" placeholder="Descripción (opcional)"><%= form.descripcion %></textarea>
         <button type="submit"> Agregar </button>
     </form>
