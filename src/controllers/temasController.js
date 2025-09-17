@@ -1,5 +1,6 @@
 // IMPORTAR temasRepo
 const temasRepo = require('../repos/temasRepo');
+const enlacesRepo = require('../repos/enlacesRepo');
 
 // FUNCION getListaTemas(req, res):
 function getListaTemas(req, res){
@@ -80,4 +81,21 @@ function postEliminarTema(req, res){
         return res.redirect('/temas?ok=Tema eliminado');
     }
 }
+
+// Enlace
+function getDetalleTema(req, res){
+    const id = req.params.id;
+    const tema = temasRepo.getById(id);
+
+    if (!tema){
+        return res.redirect('/temas?error=Tema no encontrado');
+    }
+
+    const enlaces = enlacesRepo.listByTema(id);
+    const ok = req.query.ok || "";
+    const error = req.query.error || "";
+
+    return res.render('temas/detalle', { tema, enlaces, ok, error, form: { titulo:"", url:"", descripcion:"" }});
+}
+
 module.exports = { getListaTemas, getFormNuevoTema, postCrearTema, getFormEditarTema, postEditarTema, postEliminarTema };
