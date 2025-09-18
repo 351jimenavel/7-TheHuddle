@@ -25,9 +25,11 @@
                     <form method="POST" action="/temas/<%= t.id %>/votar">
                         <button type="submit" class="btn-votar-tema">Votar tema</button>
                     </form>
+                    <p></p>
                     <form method="POST" action="/temas/<%= t.id %>/eliminar">
                         <button type="submit"> Eliminar </button>
                     </form>
+                    <p></p>
                 </li>
                 <% }) %>
             </ul>
