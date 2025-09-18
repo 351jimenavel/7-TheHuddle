@@ -98,6 +98,7 @@ function postEliminarEnlace(req, res){
 function postVotarEnlace(req, res){
     const id = req.params.id;
     const enlace = enlacesRepo.getById(id);
+    const temaId = enlace.tema_id;
 
     if (!enlace){
         return res.redirect('/temas?error=Enlace no encontrado');
@@ -108,7 +109,7 @@ function postVotarEnlace(req, res){
         if (actualizado){
             return res.send({ok: true, votos: actualizado.votos, id});
         } else{
-            return res.redirect("/temas?ok=Voto registrado");
+            return res.redirect(`/temas/${temaId}?ok=Voto registrado`);
         }
     }catch(err){
         return res.redirect('/temas?error=Tema no encontrado');
