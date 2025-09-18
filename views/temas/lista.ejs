@@ -23,7 +23,7 @@
                     <p><a href="/temas/<%= t.id %>/editar">Editar</a></p>
                     <!-- <p> Votos: <%= t.votos %></p> -->
                     <form method="POST" action="/temas/<%= t.id %>/votar">
-                        <button type="button" class="btn-votar-tema">Votar tema</button>
+                        <button type="submit" class="btn-votar-tema">Votar tema</button>
                     </form>
                     <form method="POST" action="/temas/<%= t.id %>/eliminar">
                         <button type="submit"> Eliminar </button>
