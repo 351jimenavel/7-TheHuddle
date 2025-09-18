@@ -17,5 +17,5 @@ app.use(temasRouter);
 app.use(enlacesRouter);
 
 app.listen(port, () => {
-    console.log("Servidor corriendo en puerto", `${port}`);
+    console.log("Servidor corriendo en puerto", `http://localhost:${port}/temas`);
 });
