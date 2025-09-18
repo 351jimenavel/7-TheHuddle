@@ -21,7 +21,7 @@
                     — <span class="votos"><%= t.votos %></span> votos
                     <p><a href="/temas/<%= t.id %>">Ver detalles</a></p>
                     <p><a href="/temas/<%= t.id %>/editar">Editar</a></p>
-                    <p> Votos: <%= t.votos %></p>
+                    <!-- <p> Votos: <%= t.votos %></p> -->
                     <form method="POST" action="/temas/<%= t.id %>/votar">
                         <button type="button" class="btn-votar-tema">Votar tema</button>
                     </form>
