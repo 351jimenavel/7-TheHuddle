@@ -3,7 +3,7 @@ const db = require("../db.js");
 function listByTema(temaId){
     return db.prepare(`SELECT * FROM enlaces 
         WHERE tema_id = ? 
-        ORDER BY created_at DESC`).all(Number(temaId));
+        ORDER BY votos DESC, created_at DESC`).all(Number(temaId));
 }
 
 function getById(id){
