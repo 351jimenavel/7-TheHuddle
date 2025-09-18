@@ -25,9 +25,11 @@
                 <% if (e.descripcion){ %>
                     <p><%= e.descripcion %></p>
                 <% } %>
-                <!-- — <span class="votos"><%= e.votos %></span> votos -->
+                — <span class="votos">Votos: <%= e.votos %></span>
                 <p><a href="/enlaces/<%= e.id %>/editar">Editar</a></p>
-                <!-- <button type="button" class="btn-votar-tema">Votar enlace</button> -->
+                <form method="POST" action="/enlaces/<%= e.id %>/votar">
+                    <button type="button" class="btn-votar-tema">Votar enlace</button>
+                </form>
                 <form method="POST" action="/enlaces/<%= e.id %>/eliminar">
                     <button type="submit"> Eliminar </button>
                 </form>
