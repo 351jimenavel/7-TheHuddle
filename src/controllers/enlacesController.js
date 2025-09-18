@@ -94,4 +94,25 @@ function postEliminarEnlace(req, res){
     }
 }
 
-module.exports = { postCrearEnlace, getFormEditarEnlace, postEditarEnlace, postEliminarEnlace};
+// Votos
+function postVotarEnlace(req, res){
+    const id = req.params.id;
+    const enlace = enlacesRepo.getById(id);
+
+    if (!enlace){
+        return res.redirect('/temas?error=Enlace no encontrado');
+    }
+
+    try{
+        const actualizado = enlacesRepo.vote(id);
+        if (actualizado){
+            return res.send({ok: true, votos: actualizado.votos, id});
+        } else{
+            return res.redirect("/temas?ok=Voto registrado");
+        }
+    }catch(err){
+        return res.redirect('/temas?error=Tema no encontrado');
+    }
+}
+
+module.exports = { postCrearEnlace, getFormEditarEnlace, postEditarEnlace, postEliminarEnlace, postVotarEnlace};
