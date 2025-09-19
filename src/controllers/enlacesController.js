@@ -112,13 +112,13 @@ function postVotarEnlace(req, res){
         return res.redirect('/temas?error=Enlace no encontrado');
     }
 
-    // Logs de diagnostico
-    console.log('[postVotarEnlace] Voto -->', 'enlaceId:', id);
     try{
         const actualizado = enlacesRepo.vote(id);
         if (actualizado){
             return res.send({ok: true, votos: actualizado.votos, id});
         } else{
+            // Logs de diagnostico
+            console.log('[postVotarEnlace] Voto -->', 'enlaceId:', id);
             return res.redirect(`/temas/${temaId}?ok=Voto registrado`);
         }
     }catch(err){
