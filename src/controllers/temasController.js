@@ -8,6 +8,8 @@ function getListaTemas(req, res){
         const ok = req.query.ok || "";
         const error = req.query.error || "";
         const temas = temasRepo.listWithVoteCountOrdenado();
+        // Logs de diagnostico
+        console.log('[getListaTemas] Listado de temas -->', 'specs:', temas);
         res.render('temas/lista', {temas: temas,ok,error});
     }
     catch(err){
@@ -33,6 +35,8 @@ function postCrearTema(req, res){
     // Llamar a repo
     try{
         temasRepo.create({titulo: tituloTrim, descripcion: descripcionTrim});
+        // Logs de diagnostico
+        console.log('[postCrearTema] Tema creado -->', 'specs:', {titulo: tituloTrim, descripcion: descripcionTrim});
         return res.redirect('/temas?ok=Tema creado correctamente');
     }
     catch(err){
@@ -45,6 +49,8 @@ function getFormEditarTema(req, res){
     const id = req.params.id;
     const tema = temasRepo.getById(id);
     if (tema){
+        // Logs de diagnostico
+        console.log('[getFormEditarTema] Editar Tema -->', 'specs:', tema);
         return res.render('temas/editar', { ok:"", error:"", id:tema.id, form:{titulo:tema.titulo, descripcion:tema.descripcion} });
     } else {
         return res.redirect('/temas?error=Tema no encontrado');
@@ -62,6 +68,9 @@ function postEditarTema(req, res){
 
     try{
         temasRepo.update(id, {titulo: titulo, descripcion: descripcion});
+
+         // Logs de diagnostico
+        console.log('[postEditarTema] Editado -->', 'specs:', {titulo: titulo, descripcion: descripcion});
         return res.redirect('/temas?ok=Tema actualizado');
     }catch(err){
         if (err && err.message === 'NOT_FOUND'){
@@ -80,6 +89,8 @@ function postEliminarTema(req, res){
     if (filas === 0){
         return res.redirect('/temas?error=Tema no encontrado');
     }else{
+        // Logs de diagnostico
+        console.log('[postEliminarTema] Tema eliminado -->', 'temaId:', id)
         return res.redirect('/temas?ok=Tema eliminado');
     }
 }
@@ -97,6 +108,8 @@ function getDetalleTema(req, res){
     const ok = req.query.ok || "";
     const error = req.query.error || "";
 
+    // Logs de diagnostico
+    console.log('[getDetalleTema] Detalles de Tema -->', 'temaId:', id)
     return res.render('temas/detalle', { tema, enlaces, ok, error, form: { titulo:"", url:"", descripcion:"" }});
 }
 
@@ -109,6 +122,8 @@ function postVotarTema(req, res){
         if (actualizado){
             return res.send({ok: true, votos: actualizado.votos, id});
         } else{
+            // Logs de diagnostico
+            console.log('[postVotarTema] Voto registrado -->', 'temaId:', id)
             return res.redirect("/temas?ok=Voto registrado");
         }
     }catch(err){
