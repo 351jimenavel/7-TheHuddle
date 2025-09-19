@@ -11,8 +11,7 @@ function postCrearEnlace(req, res){
     const descripcionTrim = descripcion.trim();
 
     // Logs de diagnóstico
-    console.log('[postCrearEnlace] temaIdRaw:', temaIdRaw, 'temaId:', temaId);
-    console.log('[postCrearEnlace] titulo:', tituloTrim, 'url:', urlTrim);
+    console.log('[postCrearEnlace] Agregado -->', 'temaId:', temaId, 'titulo:', tituloTrim, 'url:', urlTrim);
 
     // Validaciones del controller (evitan BAD_REQUEST del repo)
     if (!Number.isFinite(temaId) || temaId <= 0) {
@@ -42,7 +41,11 @@ function getFormEditarEnlace(req, res){
     if (!enlace){
         return res.redirect('/temas?error=Enlace no encontrado');
     }
+    // Logs de diagnostico
+    console.log('[getFormEditarEnlace] Editando -->', 'specs:', enlace);
+
     return res.render('enlaces/editar', { ok:"", error:"", id:enlace.id, temaId: enlace.tema_id, form:{titulo:enlace.titulo, url: enlace.url,descripcion:enlace.descripcion} });
+
 }
 
 function postEditarEnlace(req, res){
@@ -63,6 +66,8 @@ function postEditarEnlace(req, res){
 
     try{
         enlacesRepo.update(id, {titulo: titulo, url:url ,descripcion: descripcion});
+        // Logs de diagnostico
+        console.log('[postEditarEnlace] Editado -->', 'specs:', {titulo: titulo, url:url ,descripcion: descripcion});
         return res.redirect(`/temas/${temaId}?ok=Enlace actualizado`); // temaId viene del enlace o lo pasás en el form hidden
     }catch(err){
         if (err && err.message === 'NOT_FOUND'){
@@ -86,12 +91,15 @@ function postEliminarEnlace(req, res){
     }
     const temaId = enlace.tema_id;
     const filas = enlacesRepo.remove(id);
+    // Logs de diagnostico
+    console.log('[postEliminarEnlace] Eliminado -->', 'specs:', enlace);
     
     if (filas === 1){
         return res.redirect(`/temas/${temaId}?ok=Enlace eliminado`);
     }else{
         return res.redirect(`/temas/${temaId}?error=No se pudo eliminar`);
     }
+
 }
 
 // Votos
@@ -104,6 +112,8 @@ function postVotarEnlace(req, res){
         return res.redirect('/temas?error=Enlace no encontrado');
     }
 
+    // Logs de diagnostico
+    console.log('[postVotarEnlace] Voto -->', 'enlaceId:', id);
     try{
         const actualizado = enlacesRepo.vote(id);
         if (actualizado){
